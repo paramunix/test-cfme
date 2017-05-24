@@ -1,0 +1,15 @@
+[mysqld]
+datadir=/var/lib/mysql
+#socket=/var/lib/mysql/mysql.sock
+user=mysql
+#disabling sybolic links for security
+symbolic-links=0
+port={{mysql_port}}
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mariadb/mysqld.pid
+
+[client]
+
+socket=/var/lib/mysql/mysql.sock

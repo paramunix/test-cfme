@@ -1,0 +1,46 @@
+---
+- name: update repository for yum
+  hosts: all
+  become: yes
+
+
+  tasks:
+  - name:  update repo
+    shell:  yum  update -y
+
+  - name: INSTALL DOCKER
+    yum: name=docker state=latest
+
+  - name: START SERVICES AND ENABLE 
+    service: name=docker state=started enabled=yes
+    service: name=httpd state=started enabled=yes
+
+  - name: INstall autofs
+    yum: name=autofs state=latest
+    notify:  trigger-autofs
+
+  - name: Get date for message
+    shell: date
+    register: date
+    
+  - debug: msg="THE DATE IS {{date.stdout}}"
+
+  - name: GET OS INFO 
+    shell: uname -a 
+    register: info
+
+
+  - debug: msg="THE OS  IS {{info.stdout}}"
+
+  - debug: var=ansible_distribution
+
+
+
+
+  handlers:
+  - name: trigger-autofs
+    service: name=autofs state=restarted
+
+
+
+#- include: playbook-01.yaml

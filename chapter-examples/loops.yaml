@@ -1,0 +1,13 @@
+---
+- name: LOOPS | WITH ITEMS
+  hosts: all
+  become: yes
+
+
+  tasks:
+  - name: INSTALL PACKAGES
+    yum: name={{item}} state=latest
+    with_items:
+     - samba
+     - elinks
+     - httpd

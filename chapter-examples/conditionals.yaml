@@ -1,0 +1,19 @@
+---
+- name: CONDITIONALS | WHEN STATEMENT 
+  hosts: all
+  become: yes
+
+
+  tasks:
+  - name: CHECK RELEASE...
+    debug: msg="RELEASE  IS ....{{ansible_distribution_release}}" 
+    register: REL
+    
+  - name: do something if its redhat (maipo)
+    shell: cat /etc/redhat-release
+    register: cmd
+
+  - debug: msg="This was done ONLY FOR MAIPO----- {{cmd.stdout}}"
+    when: ansible_distribution_release == 'Maipo'
+
+

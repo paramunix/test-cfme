@@ -1,0 +1,38 @@
+---
+- name: PRINT ANSIBLE VARIABLES
+  hosts: all
+  become: yes
+
+
+  tasks:
+  - name: GET VARIABLES...
+    debug: var=ansible_local
+
+  - name: PRINTING...
+    debug: msg="TITLE IS ....{{ansible_local.example.book.title}}" 
+
+  - name: PRINTING...
+    debug: msg="AUTHOR IS ....{{ansible_local.example.book.author}}" 
+
+
+  - name: PRINTING...
+    debug: msg="PUBLISHER IS ....{{ansible_local.example.book.publisher}}" 
+
+  - name: Get date for message
+    shell: date
+    register: date
+
+
+  - debug: msg="THE DATE IS {{date.stdout}}"
+
+  - name: GET OS INFO
+    shell: uname -a
+    register: info
+
+
+  - debug: msg="THE OS  IS {{info.stdout}}"
+
+  - debug: var=ansible_distribution
+  - debug: var=ansible_bios_date
+  - debug: var=ansible_memory_mb
+
