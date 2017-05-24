@@ -1,0 +1,10 @@
+#!/bin/bash
+
+TS=`date +"%m-%d-%T"`
+echo $TS
+mv /var/tmp/playbooks.tar /var/tmp/playbooks.tar-"$TS"
+tar cvfz /var/tmp/playbooks.tar /home/ansible/playbooks
+
+echo "git commit -m < > "
+echo "paramunix@gmail.com"
+git push origin  master
