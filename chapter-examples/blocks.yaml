@@ -1,1 +1,23 @@
+### Like functions: Privilege escalation for specific blocks.
+### Error handling: print diff msgs in case of success and failure
+---
+- name: LOOPS | WITH ITEMS
+  hosts: all
+  become: yes
+ 
+ 
+  tasks:
+  - block:
+     - name: BLOCK SUCESS TEST
+       yum: name={{item}} state=latest
+       with_items:
+       - nothingx
+       - elinks
+       - httpd
+ 
+    rescue:
+    - debug: msg=" ERROR for task BLOCK"
+    always:
+    - debug: msg="Always message"
+ 
 
