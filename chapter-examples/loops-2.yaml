@@ -6,13 +6,14 @@
   become: yes
 
   tasks:
-  - name: PARSE OVER THE ENVIRONMENT FACTS
-    debug: msg={{item.key}}={{item.value}}
-    with_dict: ansible_env
+#   - name: PARSE OVER THE ENVIRONMENT FACTS
+#     debug: msg={{item.key}}={{item.value}}
+#     with_dict: ansible_env
 
-  - name: Do untill something
-    shell: echo hello
-    register: output
-    delay: 5
-    untill: output.stdout.find('hello') != 5
+   - name: Do untill something
+     shell: echo hello
+     register: output
+     retries: 5
+     delay: 5
+     until: output.stdout.find('hello') != 5
 
