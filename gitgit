@@ -1,3 +1,5 @@
+## Add the CLI work to github
+#
 #!/bin/bash
 
 TS=`date +"%m-%d-%T"`
